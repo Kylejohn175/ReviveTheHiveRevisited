@@ -25,20 +25,40 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	UPROPERTY(EditAnywhere)
+	// Total Zone Parameters
+	UPROPERTY(EditAnywhere, Category = "Zone Start Parameters")
 		FVector spawnStartPos;
+	UPROPERTY(EditAnywhere, Category = "Zone Start Parameters")
+		FVector2D startSpawnTimer;
+	UPROPERTY(EditAnywhere, Category = "Zone Start Parameters")
+		FIntPoint startSpawnRate;
+
+	UPROPERTY(EditAnywhere, Category = "Zone End Parameters")
+		FVector spawnEndPos;
+	UPROPERTY(EditAnywhere, Category = "Zone End Parameters")
+		FVector2D endSpawnTimer;
+	UPROPERTY(EditAnywhere, Category = "Zone End Parameters")
+		FIntPoint endSpawnRate;
+
+
+	// Spawning Zone Parameters (Spawns in front of the player ship)
+	UPROPERTY(EditAnywhere)
+		float spawnStartDistance;
 	UPROPERTY(EditAnywhere)
 		float spawnStartRadius;
-
 	UPROPERTY(EditAnywhere)
-		float spawnZoneSize;
+		float spawnEndDistance;
 	UPROPERTY(EditAnywhere)
 		float spawnEndRadius;
 
 	UPROPERTY(EditAnywhere)
-		int numberOfAsteroids;
+		AActor* playerShip;
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<AAsteroid_Actor> asteroidBP;
 
-	void SpawnAsteroids();
+	float currentSpawnTime;
+
+	void HandleSpawnTimer(float DeltaTime);
+	void SpawnAsteroids(int numberToSpawn);
+	
 };
