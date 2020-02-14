@@ -85,8 +85,6 @@ void AAsteroidSpawner_Actor::HandleSpawnTimer(float DeltaTime)
 
 void AAsteroidSpawner_Actor::SpawnAsteroids(int numberToSpawn)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Spawning Asteroids: %d"), numberToSpawn);
-
 	// Getting Ship Point Along The Spawnable Zone
 	float point = (spawnStartPos.Y - playerShip->GetActorLocation().Y) / (spawnStartPos.Y - spawnEndPos.Y);
 	point = FMath::Clamp<float>(point, 0.0f, 1.0f);
@@ -101,11 +99,11 @@ void AAsteroidSpawner_Actor::SpawnAsteroids(int numberToSpawn)
 
 		// Y Position
 		FVector yPos = FVector::ZeroVector;
-		yPos.Y = (((spawnEndDistance - spawnStartDistance) * point) + spawnStartDistance) + playerShip->GetActorLocation().Y;
+		yPos.Y = (spawnEndDistance - spawnStartDistance) * yPoint;
+		yPos.Y += playerShip->GetActorLocation().Y + spawnStartDistance;
 
 		// X & Z Position
 		float currentPointRadius = ((spawnEndRadius - spawnStartRadius) * yPoint) + spawnStartRadius;
-
 		randomizer.GenerateNewSeed();
 		float xPoint = randomizer.FRandRange(-1.0f, 1.0f);
 		randomizer.GenerateNewSeed();
