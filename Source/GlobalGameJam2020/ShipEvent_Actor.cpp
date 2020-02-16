@@ -21,8 +21,5 @@ void AShipEvent_Actor::BeginPlay()
 void AShipEvent_Actor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	EventRoom brokenRoom = EventRoom::ELECTRICITY_ROOM;
-	OnShipFixEvent.Broadcast(brokenRoom);
 }
 
