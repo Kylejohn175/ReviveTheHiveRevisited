@@ -100,7 +100,7 @@ void AAsteroidSpawner_Actor::SpawnAsteroids(int numberToSpawn)
 		// Y Position
 		FVector yPos = FVector::ZeroVector;
 		yPos.Y = (spawnEndDistance - spawnStartDistance) * yPoint;
-		yPos.Y += playerShip->GetActorLocation().Y + spawnStartDistance;
+		yPos.Y += spawnStartDistance;
 
 		// X & Z Position
 		float currentPointRadius = ((spawnEndRadius - spawnStartRadius) * yPoint) + spawnStartRadius;
@@ -121,7 +121,7 @@ void AAsteroidSpawner_Actor::SpawnAsteroids(int numberToSpawn)
 		xzPos *= currentPointRadius;
 
 		// New Position
-		FVector newPos = xzPos + yPos;
+		FVector newPos = xzPos + yPos + playerShip->GetActorLocation();
 		AAsteroid_Actor* newAsteroid = GetWorld()->SpawnActor<AAsteroid_Actor>(asteroidBP, FVector::ZeroVector, FRotator::ZeroRotator);
 		if (newAsteroid)
 		{

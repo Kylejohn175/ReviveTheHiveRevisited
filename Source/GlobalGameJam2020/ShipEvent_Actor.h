@@ -46,7 +46,6 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "EventDispatchers")
 		FShipBreakEvent OnShipBreakEvent;
-
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "EventDispatchers")
 		FShipFixEvent OnShipFixEvent;
 };
