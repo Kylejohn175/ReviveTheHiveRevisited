@@ -3,6 +3,8 @@
 
 #include "ShipEvent_Actor.h"
 
+#include "Math/RandomStream.h"
+
 // Sets default values
 AShipEvent_Actor::AShipEvent_Actor()
 {
@@ -15,11 +17,31 @@ AShipEvent_Actor::AShipEvent_Actor()
 void AShipEvent_Actor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	currentBreakTime = timeBetweenShipBreakages;
 }
 
 // Called every frame
 void AShipEvent_Actor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	currentBreakTime -= DeltaTime;
+	if (currentBreakTime < 0)
+	{
+		// Initialising Randomisation Possibility
+		FRandomStream randomizer = FRandomStream();
+		randomizer.GenerateNewSeed();
+
+		// Getting new random break event
+		int r = randomizer.RandRange(0, 12);
+		EventRoom breakingRoom = (EventRoom)r;
+		FString roomName = UEnum::GetValueAsString<EventRoom>(breakingRoom);
+
+		UE_LOG(LogTemp, Log, TEXT("New Room Broken: %s"), *roomName);
+
+		OnShipBreakEvent.Broadcast(breakingRoom);
+		currentBreakTime = timeBetweenShipBreakages;
+	}
 }
 

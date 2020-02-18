@@ -48,4 +48,8 @@ public:
 		FShipBreakEvent OnShipBreakEvent;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "EventDispatchers")
 		FShipFixEvent OnShipFixEvent;
+
+	UPROPERTY(EditAnywhere)
+		float timeBetweenShipBreakages;
+	float currentBreakTime;
 };
