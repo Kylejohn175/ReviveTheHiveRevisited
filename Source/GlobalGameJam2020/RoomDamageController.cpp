@@ -3,6 +3,9 @@
 
 #include "RoomDamageController.h"
 
+#include "Kismet/GameplayStatics.h"
+#include "Engine.h"
+
 // Sets default values
 ARoomDamageController::ARoomDamageController()
 {
@@ -16,6 +19,9 @@ ARoomDamageController::ARoomDamageController()
 void ARoomDamageController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	//UWorld world = GEngine->GetWorldContexts()[0].World;
+	//shipEventHandler = (AShipEvent_Actor*)UGameplayStatics::GetActorOfClass(shipEventHandler, TSubclassOf<AShipEvent_Actor>());
 }
 
 // Called every frame
