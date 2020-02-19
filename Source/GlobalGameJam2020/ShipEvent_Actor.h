@@ -24,6 +24,7 @@ enum EventRoom
 	OTHER_ROOM
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRoomDamagedEvent, EventRoom, damageLocation, float, damageAmount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FShipBreakEvent, EventRoom,  eventLocation);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FShipFixEvent, EventRoom, eventLocation);
 
@@ -48,6 +49,8 @@ public:
 		FShipBreakEvent OnShipBreakEvent;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "EventDispatchers")
 		FShipFixEvent OnShipFixEvent;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "EventDispatchers")
+		FRoomDamagedEvent OnShipDamage;
 
 	UPROPERTY(EditAnywhere)
 		float timeBetweenShipBreakages;
