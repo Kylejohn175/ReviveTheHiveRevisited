@@ -24,16 +24,20 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	AShipEvent_Actor* shipEventHandler;
+		AShipEvent_Actor* shipEventHandler;
 
 	UPROPERTY(EditAnywhere)
 		TEnumAsByte<EventRoom> roomType;
 
-	void RoomBreaking(EventRoom breakingRoomType);
-	void RoomFixed(EventRoom fixedRoomType);
+	// Event Handling
+	UFUNCTION()
+		void RoomBreaking(EventRoom breakingRoomType);
+	UFUNCTION()
+		void RoomFixed(EventRoom fixedRoomType);
 
-	// Params For Controlling How To Damage The Ship
-	bool isDamaging;
+	// Damage Details
+	UPROPERTY(EditAnywhere)
+		bool isDamaging;
 	UPROPERTY(EditAnywhere)
 		float timeToDamage;
 	float currentDamageTimer;
