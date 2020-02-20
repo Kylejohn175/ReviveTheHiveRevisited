@@ -43,13 +43,14 @@ void ARoomDamageController::Tick(float DeltaTime)
 		currentDamageTimer -= DeltaTime;
 		if (currentDamageTimer <= 0)
 		{
+			currentDamageTimer = timeToDamage;
+
 			// Broadcast the damage done to the ship
 			FString roomName = UEnum::GetValueAsString<EventRoom>((EventRoom)roomType);
-			shipEventHandler->OnShipDamage.Broadcast(roomName, this->roomDamageValue);
-
 			UE_LOG(LogTemp, Warning, TEXT("Room Broken (%s), Time Ran Out"));
 
 			// Reset the room
+			shipEventHandler->OnShipDamage.Broadcast(roomName, roomDamageValue);
 			shipEventHandler->OnShipFixEvent.Broadcast(roomType);
 		}
 	}
