@@ -34,7 +34,7 @@ void AShipEvent_Actor::Tick(float DeltaTime)
 		randomizer.GenerateNewSeed();
 
 		// Getting new random break event
-		int r = randomizer.RandRange(0, 12);
+		int r = randomizer.RandRange(0, 11);
 		EventRoom breakingRoom = (EventRoom)r;
 		FString roomName = UEnum::GetValueAsString<EventRoom>(breakingRoom);
 
